@@ -5,7 +5,7 @@ let newNoteBtn;
 let noteList;
 const express = require('express');
 const heroku = require('heroku');
-TEST 1-2
+
 
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
