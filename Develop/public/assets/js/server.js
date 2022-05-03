@@ -5,32 +5,25 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
-app.use(express.static('public/'));
-const { notes } = require('./db/db')
+app.use(express.static('public'));
+const { notes } = require('./db/db.json')
 
-function handleNewNoteView(body, notesArray) {
-    const note = body;
-
-    notesArray.push(note)
-
-    fs.writeFileSync(
-        path.join()
-        //answer here//)
-        JSON.stringify({ note: noteArray}, null, 1)
+app.get("/api/notes", (req, res) => {
+    const readFile = JSON.parse(
+      fs.readFileSync("db/db.json", {
+        encoding: "utf-8",
+      })
     );
+    res.json(readFile);
+});
 
-    return note;
-}
+app.post('/api/notes', (req, res) => {
 
-app.get('/api/notes', (req, res) => {
-
-    let results = notes;
-
-    if (req.query) {
-        results = filterByQuery(req.query, results);
-    }
-
-    res.json(results);
+    const readFile = JSON.parse(
+        fs.readFileSync('db/db.json', {
+            encoding: 'utf-8',
+        })
+    );
 });
 
 app.get('/api/notes/:id', (req, res) => {
@@ -43,19 +36,7 @@ app.get('/api/notes/:id', (req, res) => {
     }
 });
 
-app.post('/api/notes', (req, res) => {
 
-    req.body.id = notes.length.toString();
-
-    if (!validateAnimal(req.body)) {
-        res.status(400).send('The animal is not properly formatted.');
-    } else {
-
-    const note = handleNewNoteView(req.body, notes);
-    
-    res.json(note);
-    }
-});
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
