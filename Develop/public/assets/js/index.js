@@ -3,6 +3,7 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
+let getStarted;
 const express = require('express');
 const heroku = require('heroku');
 
