@@ -1,6 +1,7 @@
 const { filterByQuery, findById, createNewNote } = require('../../lib/animals');
-const { notes } = require('../../db/db');
+const { notes } = require('../../data/notes.json');
 
+//getRoute for notes page
 app.get("/notes", (req, res) => {
     let results = notes;
     if (req.query) {
@@ -9,6 +10,7 @@ app.get("/notes", (req, res) => {
     res.json(results);
 });
 
+//get route for specific note on note page
 app.get('/notes/:id', (req, res) => {
     const result = findById(req.params.id, notes);
 
@@ -19,11 +21,12 @@ app.get('/notes/:id', (req, res) => {
     }
 });
 
+//postRoute for writing note to note page
 app.post('/notes', (req, res) => {
     req.body.id = notes.length.toString();
 
     if(!validateNote(req.body)) {
-        res.status(400).json('Note is not proiperly formatted. Please enter again.');
+        res.status(400).json('Note is not properly formatted. Please enter again.');
     } else {
         const note = createNewNote(req.body, notes);
 
