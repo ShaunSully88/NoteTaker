@@ -6,24 +6,22 @@ const app = express();
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 app.use(express.static('public'));
-const { notes } = require('./db/db.json')
+const { notes } = require('db/db.json')
 
 app.get("/api/notes", (req, res) => {
-    const readFile = JSON.parse(
-      fs.readFileSync("db/db.json", {
-        encoding: "utf-8",
-      })
-    );
-    res.json(readFile);
+    const results = notes;
+    if (req.query) {
+        results = filterByQuery(req.query, results);
+    }
+    res.json(results);
 });
 
 app.post('/api/notes', (req, res) => {
+    req.body.id = notes.length.toString();
 
-    const readFile = JSON.parse(
-        fs.readFileSync('db/db.json', {
-            encoding: 'utf-8',
-        })
-    );
+    if(!validateNotes(req.body)) {
+        res.status(400).json('Note could not be saved');
+    } else {}
 });
 
 app.get('/api/notes/:id', (req, res) => {
