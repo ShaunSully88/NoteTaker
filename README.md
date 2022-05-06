@@ -15,5 +15,8 @@ THEN that note appears in the right-hand column
 WHEN I click on the Write icon in the navigation at the top of the page
 THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column
 
+# Deployed URL
+https://shaunsully88.github.io/NoteTaker/
+
 # Mock Up
 ![image](https://user-images.githubusercontent.com/98717384/167226112-953c4f33-5eeb-4f4b-8e2d-0e955946be2a.png)
