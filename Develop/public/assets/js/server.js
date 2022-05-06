@@ -10,7 +10,7 @@ app.use(express.json());
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes)
 app.use(express.static('public'));
-const { notes } = require('./db/db.json')
+
 
 
 
