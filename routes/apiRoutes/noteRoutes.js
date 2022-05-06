@@ -1,4 +1,4 @@
-const { filterByQuery, findById, createNewNote } = require('../../lib/animals');
+const { filterByQuery, findById, createNewNote } = require('../../public/assets/js/index');
 const { notes } = require('../../data/notes.json');
 
 //getRoute for notes page
