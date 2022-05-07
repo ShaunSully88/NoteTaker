@@ -1,8 +1,9 @@
+const router = require('express').Router();
 const { filterByQuery, findById, createNewNote } = require('../../public/assets/js/index');
 const { notes } = require('../../data/notes.json');
 
 //getRoute for notes page
-app.get("/notes", (req, res) => {
+router.get("/notes", (req, res) => {
     let results = notes;
     if (req.query) {
         results = filterByQuery(req.query, results);
@@ -11,7 +12,7 @@ app.get("/notes", (req, res) => {
 });
 
 //get route for specific note on note page
-app.get('/notes/:id', (req, res) => {
+router.get('/notes/:id', (req, res) => {
     const result = findById(req.params.id, notes);
 
     if (result) {
@@ -22,7 +23,7 @@ app.get('/notes/:id', (req, res) => {
 });
 
 //postRoute for writing note to note page
-app.post('/notes', (req, res) => {
+router.post('/notes', (req, res) => {
     req.body.id = notes.length.toString();
 
     if(!validateNote(req.body)) {
@@ -34,3 +35,4 @@ app.post('/notes', (req, res) => {
     }
 });
 
+module.exports = router;

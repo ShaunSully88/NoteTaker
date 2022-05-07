@@ -11,7 +11,9 @@ app.use('/api', apiRoutes);
 app.use('/', htmlRoutes)
 app.use(express.static('public'));
 const { notes } = require('./data/notes.json')
-app.listen(PORT, () => {
+
+
+router.listen(PORT, () => {
 
     console.log(`API Server now on port ${PORT}!`);
 });
