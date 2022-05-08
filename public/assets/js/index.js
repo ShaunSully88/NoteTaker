@@ -4,9 +4,6 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 let getStarted;
-const express = require('express');
-const heroku = require('heroku');
-
 
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
@@ -37,7 +34,7 @@ const getNotes = () =>
     },
   });
 
-const saveNote = (note) =>
+const saveNote = note =>
   fetch('/api/notes', {
     method: 'POST',
     headers: {

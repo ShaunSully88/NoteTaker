@@ -1,22 +1,14 @@
 const router = require('express').Router();
-
+const { filterByQuery, createNewNote, validateNote } = require('../../lib/note');
 const { notes } = require('../../data/notes.json');
 
 //getRoute for notes page
 router.get("/notes", (req, res) => {
     let results = notes;
+    if (req.query) { 
+        results = filterByQuery(req.query, results); 
+    } 
     res.json(results);
-});
-
-//get route for specific note on note page
-router.get('/notes/:id', (req, res) => {
-    const result = req.params.id;
-    
-    if (result) {
-        res.json(result);
-    } else {
-        res.send(404);
-    }
 });
 
 //postRoute for writing note to note page
